@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .main {
+            position: absolute;
+            width: 20%;
+            height: 100%;
+            background: blue;
+        }
+
+        .logo {
+            width: calc(100% - 20px);
+            margin: auto;
+            height: 70px;
+            background: red;
+            display: flex;
+            align-items: center;
+            flex-direction: row;
+            justify-content: space-evenly;
+        }
+
+        .logo img {
+            width: 30px;
+            height: 30px;
+            background: aqua;
+        }
+
+        .items {
+            width: 92%;
+            height: 400px;
+            display: flex;
+            background: yellow;
+            color: black;
+            margin: auto;
+            margin-top: 100px;
+        }
+
+        .items ul {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-evenly;
+        }
+
+        .items ul li {
+            padding: 30px 25px;
+            list-style: none;
+            margin: auto;
+        }
+
+        .items ul li:hover {
+            background-color: aqua;
+        }
+
+        .profile {
+            margin: auto;
+            margin-top: 100px;
+            width: 92%;
+            height: 100px;
+            background: pink;
+            display: flex;
+            align-items: center;
+            flex-direction: row;
+            justify-content: space-evenly;
+        }
+
+        .profile img {
+            width: 30px;
+            height: 30px;
+            background: white;
+            border-radius: 50%;
+        }
+
+        .profile button {
+            padding: 10px;
+            border-radius: 30px;
+            border: none;
+        }
+    </style>
+</head>
+
+<body style="color: white;background: black;">
+    <div class='main'>
+        <div class='logo'>
+            <img src=''>
+            <!-- <img src=''/> -->
+            <h2>
+                logoName
+            </h2>
+        </div>
+        <div class="items">
+            <ul>
+                <li><a href=""></a>Trending</li>
+                <li><a href=""></a>popular</li>
+                <li><a href=""></a>All Time Hits</li>
+                <li><a href=""></a>My Playlists</li>
+                <li><a href=""></a>Favotites</li>
+            </ul>
+        </div>
+        <div class="profile">
+            <img src="" alt="">
+            <button>signout</button>
+        </div>
+    </div>
+</body>
+
+</html>
