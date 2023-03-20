@@ -1,70 +1,74 @@
-# Getting Started with Create React App
+# Octave
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Octave is a MERN stack application that allows users to listen to songs together.  It uses the Spotify Web API on the server side for authentication, and uses the Spotify Web Playback SDK for client-side playback in the browser.
 
-## Available Scripts
+The web app is located at https://octavemusic.herokuapp.com.  Feel free to use the following information to log into Spotify to test out the application:
 
-In the project directory, you can run:
+Username: testingspot78@gmail.com
 
-### `npm start`
+Password: okThenOakLand48$$
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
 
-### `npm test`
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Pick a room
 
-### `npm run build`
+![Live Stream Page](client/public/roomselectScreenshot.jpeg)
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+When a user logs in to the site, they are redirected to the room select screen and their most recent song played on Spotify will begin playing.  They are then presented with three options.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+1. Create a new room.  This will create a new room object in the database, and continue playback of their currently playing song.  
 
-### `npm run eject`
+2. Join a room.  The user can enter a room ID, which will search the database for a room with that room ID.  If the room is found, they will be redirected to the LiveStream screen, and if the room is not found, they will be presented with an error.
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+3. Join a current room from the Current Rooms list.  The currently playing rooms are presented in a list in the RoomSelect screen.  If the user clicks the join button by any currently playing room, they will be redirected to the live stream page for that room.
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## Now Playing
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+![Live Stream Page](client/public/livestreamScreenshot.jpeg)
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+Once the user is in the livestream page, they are in one of two roles.  If they created the room, they are the creator, and if they joined the room, they are a listener.  The only difference between the two is that the creator can play, pause, go to the previous song, and go to the next song.  
 
-## Learn More
+The creator and the listeners can add songs to a room. They have three different options for doing this.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+1. They can search for a song in the bottom search bar and add the song to the queue.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+2. They can search for an artist, and then add that artists top ten songs to the upcoming queue.  (More artist functionality will be coming soon, such as playing specific albums from an artist).
 
-### Code Splitting
+3. The user can search for a playlist either in their library or in Spotify, and then play that playlist.  This will replace all current songs in the queue and start playback of the playlist.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+## Search your saved songs
 
-### Analyzing the Bundle Size
+![Live Stream Page](client/public/searchScreenshot.jpeg)
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+Using the search bar, you can browse your saved songs, view your top artists, and search the entire Spotify catalog for songs, artists, and playlists.  Once you find content that you like, you can either click Play Now to play the selected song right after the current song ends, or click Play Later to add the selected song to the end of the queue to play later.
 
-### Making a Progressive Web App
+## Make your room public for everyone to see
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+If you do not want anyone to be able to view your room from the home screen, simply click the lock at the upper right hand of the screen to make your room either public or private.
 
-### Advanced Configuration
+## Save songs you like to your Spotify library
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+If you like the current song that you are listening to, click the plus button next to the song controls to add the current song to your library.
 
-### Deployment
+## Invite your friends!
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+Simply click the share button near the song controls to get the ID of your room.  You can then send the ID to your friends, and they will be able to join whether or not the room is public or private.
 
-### `npm run build` fails to minify
+## Automatic creator switching
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Anytime the creator leaves the room, if there are any other people in the room, they will be promoted to the creator.  The creator can toggle playback, as well as clear the upcoming queue.  Anyone can add songs to the queue.  Once there are no more people in a room, it is automatically deleted, so you know that any room you join will be active!
+
+## Song Recommendations
+
+If there are no more songs left in the queue once the last song in the room ends, the application will find a song based on the last five songs played in the room, and start playback of that song for all users in the room.
+
+## Synchronization
+
+All playback of users of the room is synchronized to that of the creator.  Any time the creator toggles playback or changes the current song, the listeners' playback will also be changed.
+
+## Author
+
+Venkat sai
+Email - <a href="https://mail.google.com/mail/u/0/?ogbl#inbox?compose=GTvVlcSHwsFCqnFBslKJVVZTQGQNpTCkKtXGBRNcVJtxzbcMnjNkBLQBwmFWbpSWmGSNWsFSjpQrT">saik87630@gmail.com</a>
